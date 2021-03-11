@@ -66,10 +66,12 @@ class DefaultController extends AbstractController
      */
      public function orderingCards(Request $request): object
      {
-        $cards = \json_decode($request->get('cards'),true);
-        $colors = \json_decode($request->get('color'),true);
-        $grades = \json_decode($request->get('grade'),true);
- 
+         /**
+         * needded to controle what you get but time is up !
+         */
+        $cards = $request->get('cards');
+        $colors = $request->get('color');
+        $grades = $request->get('grade');
         return new JsonResponse([
              'cards' => $this->cardService->orderingCards($grades, $colors, $cards)
         ]);
