@@ -22,6 +22,9 @@ class DefaultController extends AbstractController
       */
       public function indexAction()
       {
+          /**
+          * entry point for react webpack
+          */
           return $this->render('default/index.html.twig');
       }
 

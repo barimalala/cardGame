@@ -4,10 +4,10 @@ namespace App\Service;
 
 class CardService
 {
-    private $number;
-    private $grades = [];
-    private $colors = [];
-    private $game = [];
+    private $number; //define the default number of cards on each hand
+    private $grades = []; // liste of all possible values
+    private $colors = []; // list of all possible colors
+    private $game = []; // current hand of the user
 
     public function __construct($number)
     {
@@ -64,13 +64,14 @@ class CardService
         * step 3 ordering card by graduation value
         */
         $gradeNumber = \count($grades);
+        
         \array_walk($games,function(&$game,$_,$params){
             $game = \json_decode($game,true);
             $game['order'] = \array_search($game['color'],$params['colors'])*$params['gradeNumber'] + \array_search($game['grade'],$params['grades']);
             return $game;
         },['grades' => $grades,'gradeNumber' => $gradeNumber,'colors' => $colors]);
 
-        // \var_dump($games);
+
          usort($games, function($a, $b) {
             return $a['order'] <=> $b['order'];
         });
